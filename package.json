@@ -1,0 +1,20 @@
+{
+  "name": "bugbank-dois-cypress",
+  "version": "1.0.0",
+  "description": "Bug Bank - Cypress",
+  "main": "index.js",
+  "scripts": {
+    "test": "cypress run",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run"
+  },
+  "keywords": [],
+  "author": "Leonardo",
+  "license": "ISC",
+  "dependencies": {
+    "cypress": "^11.0.1"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^7.6.0"
+  }
+}
