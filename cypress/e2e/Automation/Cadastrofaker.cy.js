@@ -1,10 +1,13 @@
 /// <reference types='cypress'/>
 
 import { faker } from '@faker-js/faker';
+// import { slowCypressDown } from 'cypress-slow-down'
+// slowCypressDown(500)
 
 describe('Automação BugBank - Cypress', () => {
     beforeEach(() => {
         cy.visit('https://bugbank.netlify.app/')
+        cy.reload()
     })
 
     it('Acessar Home e validar title', () => {
@@ -25,4 +28,6 @@ describe('Automação BugBank - Cypress', () => {
         cy.get('#modalText').should('contain', 'criada com sucesso').should('be.visible')
         cy.get('#btnCloseModal').should('be.visible').click()
     })
+
+ 
 })
