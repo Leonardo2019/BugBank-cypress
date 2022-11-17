@@ -67,4 +67,8 @@ describe('Automação BugBank - Cypress', () => {
         cy.get('#btnBack').should('have.text', 'Voltar').click()
 
     })
+
+    it('Altera texto - invoke', () => {
+        cy.get('.pages__Title-sc-1ee1f2s-4').invoke('text', 'Teste altera texto home')
+    })
 })
