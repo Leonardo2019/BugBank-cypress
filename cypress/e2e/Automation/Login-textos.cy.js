@@ -9,8 +9,8 @@ describe('Automação BugBank - Cypress', () => {
         cy.reload()
 
     })
-        const email = 'teste@silva.com.br'
-        const password = '123456'
+        let email = 'teste@silva.com.br'
+        let password = '123456'
 
     it('Acessar Home e validar title', () => {
         cy.title().should('be.equal', 'BugBank | O banco com bugs e falhas do seu jeito')
@@ -32,7 +32,7 @@ describe('Automação BugBank - Cypress', () => {
         cy.get('#btnCloseModal').should('be.visible').click()
     })
 
-    it.only('Link - Conheça nossos requisitos', () => {
+    it('Link - Conheça nossos requisitos', () => {
         cy.get('.styles__Link-sc-osobjw-0').click()
         cy.get('[id="accordionLogin"]').should('have.text', 'Login').click()
         cy.get('#textAccordionLogin').should('contain', '- Email e Senha são campos obrigatórios.')
