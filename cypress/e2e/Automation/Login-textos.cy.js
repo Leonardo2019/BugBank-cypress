@@ -10,7 +10,7 @@ describe('Automação BugBank - Cypress', () => {
 
     })
         let email = 'teste@silva.com.br'
-        let password = '123456'
+        let passwordNumber = '97251617'
 
     it('Acessar Home e validar title', () => {
         cy.title().should('be.equal', 'BugBank | O banco com bugs e falhas do seu jeito')
@@ -22,11 +22,12 @@ describe('Automação BugBank - Cypress', () => {
         cy.get('div[class="styles__ContainerBackButton-sc-7fhc7g-1 jokugX"]')
             .parent('form').find('input[type="email"]').type('teste@silva.com.br',{force:true})
             
-        cy.get('input[type="name"]').type(`${email}`, {force:true})
+        cy.get('input[type="name"]').type('Nome teste', {force:true})
         cy.get(':nth-child(4) > .style__ContainerFieldInput-sc-s3e9ea-0 > .input__default')
-            .type(`${password}`, {force:true})
+            .type(`${passwordNumber}`, {force:true})
         cy.get(':nth-child(5) > .style__ContainerFieldInput-sc-s3e9ea-0 > .input__default')
-            .type('123456', {force:true})
+            .type(passwordNumber, {force:true})
+        cy.get('#toggleAddBalance').click({force:true})
         cy.contains('Cadastrar').click({force:true})
         cy.get('#modalText').should('contain', 'criada com sucesso').should('be.visible')
         cy.get('#btnCloseModal').should('be.visible').click()
@@ -71,4 +72,34 @@ describe('Automação BugBank - Cypress', () => {
     it('Altera texto - invoke', () => {
         cy.get('.pages__Title-sc-1ee1f2s-4').invoke('text', 'Teste altera texto home')
     })
+
+    it('Validar mascara campo password', () => {
+        let pass = passwordNumber
+
+        cy.get('.ihdmxA').should('be.visible').click()
+        cy.get('input[type="email"]').eq(1).type( email, {force:true})
+            // .parent('form').find('input[type="email"]')
+            
+        cy.get('input[type="name"]').type('Leonardo Teste', {force:true})
+        cy.get('input[type="password"]').eq(1)
+            .type(passwordNumber,{force:true}).then(() => {
+                expect(pass).be.equal(passwordNumber)
+            })
+            
+        cy.get('input[type="password"]').eq(2)
+            .type(passwordNumber, {force:true})
+
+        cy.contains('Cadastrar').click({force:true})
+        cy.get('#modalText').should('contain', 'criada com sucesso').should('be.visible')
+        cy.get('#btnCloseModal').should('be.visible').click()
+    })
+
+    it('Logar com usuário cadastrado',() => {
+        cy.get('input[type="email"]').eq(0).type(email)
+        cy.get('input[type="password"]').eq(0).type(passwordNumber)
+        cy.get('button[class="style__ContainerButton-sc-1wsixal-0 otUnI button__child"]').click()
+        cy.get('#btnCloseModal').should('be.visible').click()
+    })
+
+    
 })
